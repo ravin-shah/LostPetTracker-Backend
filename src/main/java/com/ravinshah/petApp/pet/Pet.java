@@ -16,7 +16,7 @@ public class Pet {
 
     @Column(updatable = false)
     private String name;
-    
+
     private boolean isLost = false;
 
     public Pet(String name) {

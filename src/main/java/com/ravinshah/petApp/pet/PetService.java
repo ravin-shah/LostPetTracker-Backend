@@ -12,7 +12,13 @@ public class PetService {
     @Autowired
     PetRepository petRepository;
 
-    public void save(Pet pet) {
+    public void add(Pet pet) {
+        petRepository.save(pet);
+    }
+
+    public void update(Pet pet) throws PetNotFoundException {
+        if(!petRepository.existsById(String.valueOf(pet.getId())))
+            throw new PetNotFoundException("Pet not found");
         petRepository.save(pet);
     }
 
@@ -24,4 +30,8 @@ public class PetService {
         return petRepository.findById(String.valueOf(id));
     }
 
+    public void delete(String id) {
+        if(petRepository.existsById(id))
+            petRepository.deleteById(id);
+    }
 }
